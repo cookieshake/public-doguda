@@ -1,0 +1,261 @@
+{
+  "lockfile-version": 1,
+  "manifest": {
+    "version": 1,
+    "install": {
+      "python313": {
+        "pkg-path": "python313"
+      },
+      "uv": {
+        "pkg-path": "uv"
+      }
+    },
+    "hook": {},
+    "profile": {},
+    "options": {}
+  },
+  "packages": [
+    {
+      "attr_path": "python313",
+      "broken": false,
+      "derivation": "/nix/store/6njqakbkci2h765gyj0q9rcmkfy38hya-python3-3.13.9.drv",
+      "description": "High-level dynamically-typed programming language",
+      "install_id": "python313",
+      "license": "Python-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "name": "python3-3.13.9",
+      "pname": "python313",
+      "rev": "addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "rev_count": 908783,
+      "rev_date": "2025-12-08T09:27:56Z",
+      "scrape_date": "2025-12-10T02:55:39.947245Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "python3-3.13.9",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/xcjk9ill54kjk8mzgq6yydnx9015lidg-python3-3.13.9"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "python313",
+      "broken": false,
+      "derivation": "/nix/store/rvai2n2kh5hp0npd4vzkx5hnydjzz5q0-python3-3.13.9.drv",
+      "description": "High-level dynamically-typed programming language",
+      "install_id": "python313",
+      "license": "Python-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "name": "python3-3.13.9",
+      "pname": "python313",
+      "rev": "addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "rev_count": 908783,
+      "rev_date": "2025-12-08T09:27:56Z",
+      "scrape_date": "2025-12-10T03:05:22.564465Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "python3-3.13.9",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "debug": "/nix/store/zls66rgq3hk2i6xxf8cb8nx24b906jz2-python3-3.13.9-debug",
+        "out": "/nix/store/zc0vzc0vp0amc9iqm3cd542bmim6vh09-python3-3.13.9"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "python313",
+      "broken": false,
+      "derivation": "/nix/store/279kknx42xxmlgwc4fg87270f5qj87c1-python3-3.13.9.drv",
+      "description": "High-level dynamically-typed programming language",
+      "install_id": "python313",
+      "license": "Python-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "name": "python3-3.13.9",
+      "pname": "python313",
+      "rev": "addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "rev_count": 908783,
+      "rev_date": "2025-12-08T09:27:56Z",
+      "scrape_date": "2025-12-10T03:14:57.822070Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "python3-3.13.9",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/84s01mzl74vh69aphpl3rf07pp49pkz0-python3-3.13.9"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "python313",
+      "broken": false,
+      "derivation": "/nix/store/81f6r9031fpmpv61kf8cq4p8b11xj2ks-python3-3.13.9.drv",
+      "description": "High-level dynamically-typed programming language",
+      "install_id": "python313",
+      "license": "Python-2.0",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "name": "python3-3.13.9",
+      "pname": "python313",
+      "rev": "addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "rev_count": 908783,
+      "rev_date": "2025-12-08T09:27:56Z",
+      "scrape_date": "2025-12-10T03:24:49.140224Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "python3-3.13.9",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "debug": "/nix/store/7x8mp12az19wzadrdhjvrp731m9m3lpb-python3-3.13.9-debug",
+        "out": "/nix/store/3lll9y925zz9393sa59h653xik66srjb-python3-3.13.9"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "uv",
+      "broken": false,
+      "derivation": "/nix/store/cypg31kavj8d2f05l074bpckavpylcwc-uv-0.9.15.drv",
+      "description": "Extremely fast Python package installer and resolver, written in Rust",
+      "install_id": "uv",
+      "license": "[ Apache-2.0, MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "name": "uv-0.9.15",
+      "pname": "uv",
+      "rev": "addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "rev_count": 908783,
+      "rev_date": "2025-12-08T09:27:56Z",
+      "scrape_date": "2025-12-10T02:56:59.081062Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.9.15",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/ygjvbgmlcwcsn49h6iqmv1zb63945fil-uv-0.9.15"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "uv",
+      "broken": false,
+      "derivation": "/nix/store/9gprkj36z4dh6rw1yavf35grs211acg8-uv-0.9.15.drv",
+      "description": "Extremely fast Python package installer and resolver, written in Rust",
+      "install_id": "uv",
+      "license": "[ Apache-2.0, MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "name": "uv-0.9.15",
+      "pname": "uv",
+      "rev": "addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "rev_count": 908783,
+      "rev_date": "2025-12-08T09:27:56Z",
+      "scrape_date": "2025-12-10T03:07:11.445415Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.9.15",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/ixkl2madqd89qy5yhhr963pq5jdlffwx-uv-0.9.15"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "uv",
+      "broken": false,
+      "derivation": "/nix/store/8qjrnz1y5al2mr9xjvlrq1dj9zxb48qj-uv-0.9.15.drv",
+      "description": "Extremely fast Python package installer and resolver, written in Rust",
+      "install_id": "uv",
+      "license": "[ Apache-2.0, MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "name": "uv-0.9.15",
+      "pname": "uv",
+      "rev": "addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "rev_count": 908783,
+      "rev_date": "2025-12-08T09:27:56Z",
+      "scrape_date": "2025-12-10T03:16:24.961386Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.9.15",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/94x53a87w6dhzpbhqbyylwpax4cy6kp8-uv-0.9.15"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "uv",
+      "broken": false,
+      "derivation": "/nix/store/k3c1wqg5bmymhscwcxrfl42gd7i9vki3-uv-0.9.15.drv",
+      "description": "Extremely fast Python package installer and resolver, written in Rust",
+      "install_id": "uv",
+      "license": "[ Apache-2.0, MIT ]",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "name": "uv-0.9.15",
+      "pname": "uv",
+      "rev": "addf7cf5f383a3101ecfba091b98d0a1263dc9b8",
+      "rev_count": 908783,
+      "rev_date": "2025-12-08T09:27:56Z",
+      "scrape_date": "2025-12-10T03:26:41.582574Z",
+      "stabilities": [
+        "staging",
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "0.9.15",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/qpjjd520lh2pjif58wmlrjd4a5mmm55w-uv-0.9.15"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    }
+  ]
+}
