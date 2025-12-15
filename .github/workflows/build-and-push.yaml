@@ -69,8 +69,8 @@ jobs:
         with:
             token: ${{ secrets.GH_DELETE_PAT }}
             repository_owner: cookieshake
-            repository: dogu
-            package_name: dogu
+            repository: public-doguda
+            package_name: public-doguda
             untagged_only: true
             owner_type: user
 
