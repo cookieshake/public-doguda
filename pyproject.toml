@@ -9,6 +9,7 @@ dependencies = [
     "doguda>=0.1.1",
     "html-to-markdown>=2.14.2",
     "httpx>=0.28.1",
+    "playwright>=1.57.0",
 ]
 
 [tool.uv]
