@@ -64,18 +64,12 @@ jobs:
     needs: build-and-push
     runs-on: ubuntu-latest
     steps:
-      - name: Delete all containers from package without tags
-        uses: Chizkiyahu/delete-untagged-ghcr-action@v6
-        with:
-            token: ${{ secrets.GH_DELETE_PAT }}
-            repository_owner: cookieshake
-            repository: public-doguda
-            package_name: public-doguda
-            untagged_only: true
-            owner_type: user
-
       - name: Cleanup old images from GitHub Container Registry
         uses: dataaxiom/ghcr-cleanup-action@v1
         with:
           older-than: 3 months
           keep-n-tagged: 10
+          delete-untagged: true
+          delete-ghost-images: true
+          delete-partial-images: true
+          delete-orphaned-images: true
