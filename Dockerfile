@@ -24,6 +24,7 @@ COPY pyproject.toml uv.lock ./
 
 # Install dependencies without installing the project itself
 RUN uv sync --frozen --no-install-project
+RUN uv run python -m playwright install
 
 # Copy the rest of the project
 COPY . .
