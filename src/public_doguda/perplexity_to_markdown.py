@@ -1,8 +1,6 @@
 from public_doguda import app
 from pydantic import BaseModel
 from playwright.async_api import async_playwright
-from html_to_markdown import convert
-from bs4 import BeautifulSoup
 import asyncio
 
 
@@ -12,10 +10,10 @@ class PerplexityResponse(BaseModel):
     raw_html: str
 
 
-async def _fetch_perplexity_content(url: str) -> str:
+async def _fetch_perplexity_content(url: str) -> tuple[str, str]:
     async with async_playwright() as p:
         browser = await p.chromium.launch(
-            headless=True,
+            headless=False,
             args=[
                 "--disable-blink-features=AutomationControlled",
                 "--no-sandbox",
@@ -30,59 +28,90 @@ async def _fetch_perplexity_content(url: str) -> str:
         try:
             await page.goto(url, timeout=60000)
 
-            # Wait for the challenge to pass (title shouldn't be "Just a moment...")
-            # and for the content to load (looking for the prose content)
+            # 1. Close login modal if it's blocking the view
+            close_modal_button = page.locator('button[data-testid="close-modal"], button[aria-label="Close"]').first
+            try:
+                # Wait briefly for modal to appear
+                await close_modal_button.wait_for(state="visible", timeout=5000)
+                await close_modal_button.click()
+                # Wait for modal to disappear
+                await asyncio.sleep(1)
+            except Exception:
+                # Modal might not be there, proceed
+                pass
+
+            # 2. Wait for the page to load correctly and find dots button
+            dots_button = None
             for _ in range(30):
                 title = await page.title()
-                if "Just a moment" not in title and "Perplexity" not in title:
-                     # Attempt to find the content container
-                     # Based on investigation: class="prose dark:prose-invert ..."
-                     content_element = await page.query_selector('.prose')
-                     if content_element:
-                         return await page.content()
-
+                if "Just a moment" not in title:
+                    # Try to find the dots button (Thread Actions)
+                    dots_button = page.locator('button[aria-label*="작업"], button[aria-label*="Actions"], button:has(use[xlink\\:href="#pplx-icon-dots"])').first
+                    if await dots_button.is_visible():
+                        break
                 await asyncio.sleep(1)
 
-            # If we timed out but have some content, return it anyway to try parsing
-            return await page.content()
+            if not dots_button or not await dots_button.is_visible():
+                return "", await page.content()
+
+            # 3. Click the dots button to open the menu
+            await dots_button.click()
+            await asyncio.sleep(1)
+            
+            # 4. Look for "Markdown으로 내보내기" or "Export to Markdown"
+            # Try multiple detection strategies for the export button
+            export_button = page.locator('div:has-text("Markdown으로 내보내기"), div:has-text("Export to Markdown"), button:has(use[xlink\\:href="#pplx-icon-markdown"])').last
+            
+            try:
+                # Wait for the menu item to be visible and clickable
+                await export_button.wait_for(state="visible", timeout=10000)
+                
+                async with page.expect_download(timeout=30000) as download_info:
+                    await export_button.click()
+                
+                download = await download_info.value
+                path = await download.path()
+                with open(path, "r", encoding="utf-8") as f:
+                    markdown_content = f.read()
+                
+                return markdown_content, await page.content()
+            except Exception:
+                # Fallback to a simpler text search if the complex locator fails
+                try:
+                    export_button = page.get_by_text("Markdown으로 내보내기").first
+                    if not await export_button.is_visible():
+                        export_button = page.get_by_text("Export to Markdown").first
+                    
+                    await export_button.wait_for(state="visible", timeout=5000)
+                    async with page.expect_download(timeout=30000) as download_info:
+                        await export_button.click()
+                        
+                    download = await download_info.value
+                    path = await download.path()
+                    with open(path, "r", encoding="utf-8") as f:
+                        markdown_content = f.read()
+                    return markdown_content, await page.content()
+                except Exception:
+                    pass
+            
+            return "", await page.content()
 
         finally:
             await browser.close()
 
 
-def _extract_and_convert(html: str) -> str:
-    soup = BeautifulSoup(html, "html.parser")
-
-    # Perplexity content is usually in a div with "prose" class
-    # We found: class="prose dark:prose-invert inline leading-relaxed break-words min-w-0 [word-break:break-word] prose-strong:font-medium [&_>*:first-child]:mt-0"
-    content_div = soup.select_one(".prose")
-
-    if not content_div:
-        # Fallback: try to find by ID if the class selector is too brittle
-        # We saw id="markdown-content-0" in the investigation
-        content_div = soup.select_one('[id^="markdown-content-"]')
-
-    if not content_div:
-        return ""
-
-    # Remove citations (small numbers/links usually) if needed,
-    # but the request asked to mimic the download which usually keeps them or formats them.
-    # For now, let's keep them but maybe clean up some UI specific elements if they intrude.
-    # The investigation showed: <span class="citation inline" ...>
-
-    return convert(str(content_div))
-
-
 @app.doguda
 async def perplexity_to_markdown(url: str) -> PerplexityResponse:
     """
-    Fetches a Perplexity shared URL and extracts the content as Markdown.
+    Fetches a Perplexity shared URL and extracts the content as Markdown using the official export feature.
     """
-    raw_html = await _fetch_perplexity_content(url)
-    markdown_content = _extract_and_convert(raw_html)
+    downloaded_markdown, raw_html = await _fetch_perplexity_content(url)
+
+    if not downloaded_markdown:
+        raise ValueError("Failed to download markdown from Perplexity. The export button might not be available or the page failed to load correctly.")
 
     return PerplexityResponse(
         url=url,
-        markdown=markdown_content,
+        markdown=downloaded_markdown,
         raw_html=raw_html
     )
