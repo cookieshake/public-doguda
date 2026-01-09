@@ -13,7 +13,7 @@ class PerplexityResponse(BaseModel):
 async def _fetch_perplexity_content(url: str) -> tuple[str, str]:
     async with async_playwright() as p:
         browser = await p.chromium.launch(
-            headless=False,
+            headless=True,
             args=[
                 "--disable-blink-features=AutomationControlled",
                 "--no-sandbox",
